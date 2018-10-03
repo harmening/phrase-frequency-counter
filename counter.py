@@ -535,6 +535,14 @@ def counter_sentences(messages_id):
 
 
 if __name__ == '__main__':
+    import sys
+    if (len(sys.argv) == 2 and sys.argv[1] and len(sys.argv[1]) > 1 ):
+        pass
+    else:
+        print("Run the script with python counter.py <<path_to_mailbox_folder>>")
+        sys.exit(0)
+    path = sys.argv[1]
+
     num_cpus = mp.cpu_count()
     print(num_cpus)
     mails = []
@@ -542,5 +550,7 @@ if __name__ == '__main__':
         mails.append(mail)
    
     p = mp.Pool(num_cpus)
+    # Sentence level
     p.map(counter_sentences, mails)
-    #p.map(counter_nosentences, mails)
+    # Message/document level
+    p.map(counter_nosentences, mails)
