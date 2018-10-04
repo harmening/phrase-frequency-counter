@@ -1,6 +1,8 @@
 # Phrase Frequency Counter
 
-This repo contains all code required for evaluating a mailbox due to the frequency of recurring phrases. The core algorithm is implemented in C and also in python.
+This repo contains a sophisticated metric for evaluating the quality of eloquence and used vocabulary and the eloquence in text datasets like a collection of messages or entire
+mailboxes. This gives an useful parameter in terms of assessing the datas usefulness for the training of Neural Networks in NLP. The metric is mainly based on the frequency of recurring phrases within the single text documents.
+The core algorithm is implemented in C and also in python.
 It can be chosen to count phrases on message or on sentence level (meaning, that we don't allow
 phrases to consist of more than one sentence).
 The procedure for finding and counting a phrase obeys the following the rules:
@@ -28,5 +30,6 @@ Here are some instructions for getting your own Verne running on your local comp
 2. From the root of the repo, run `python cythonize_numerics.py build_ext --inplace` to precompile the c core.
 
 ### Running the script
-To start the phrase counting on a given mailbox / collection of messages/texts, run `python counter.py <<path_to_mailbox_folder>>`.
+To start the phrase counting on a given mailbox / collection of messages/texts, run
+`python counter.py <<path_to_mailbox_folder>>`.
 
