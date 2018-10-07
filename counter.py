@@ -54,13 +54,13 @@ def analysis(tuples):
 
 
 
-def counter_nos_c(messages_id):
+def counter_nos_c(mails):
     max_num_words, current_word_idx, current_id_idx = 0, 0, 0
     word2idx, id2idx = {}, {}
     index2word, index2id, messages_as_digits, mids_as_digits = [], [], [], []
     # Transform messages of words into sequence of digits
-    for mid in messages_id.keys():
-        message = messages_id[mid].split()
+    for mail in mails:
+        message = mail.split()
         if len(message) > max_num_words:
             max_num_words = len(message)
 
@@ -97,19 +97,13 @@ def counter_nos_c(messages_id):
 
 
 
-def counter_nos_p(messages_id):
-    messages = messages_id.values()
+def counter_nos_p(mails):
+    messages = mails
     max_num_words = 0   # largest number of words in sentence of all messages
     words = []  # store words
     mark = []   # corresponding marking of words
     tuples = []     # for later creation of matrix; contains phrase and count
     
-    # Revert messages_id to have message-ids as keys
-    ids = {}
-    for k, v in messages_id.iteritems():
-        ids[v] = ids.get(v, [])
-        ids[v].append(k)
-
     num_messages = len(messages)  # number of input texts/messages/emails
 
 
@@ -224,19 +218,18 @@ def counter_nos_p(messages_id):
 
 
 
-def counter_s_c(messages_id):
+def counter_s_c(mails):
     current_word_idx, current_id_idx, num_sentences, max_num_words = 0, 0, 0, 0
     word2idx, id2idx = {}, {}
     index2word, index2id, sentences_as_digits, mids_as_digits = [], [], [], []
 
     #Preprocessing
-    ids = messages_id.keys()
     sentences = []
-    for m in range(len(ids)):
+    for m in range(len(mails)):
         sentences_as_digits.append([])
 
         # splitting sentences
-        doc = nlp(unicode(messages_id.values()[m], "utf-8"))
+        doc = nlp(unicode(mails[m], "utf-8"))
         sentences.append([sent.string.strip().encode('utf-8').strip() \
                 for sent in doc.sents])
         for s in range(len(sentences[m])):
@@ -260,12 +253,11 @@ def counter_s_c(messages_id):
             sentences_as_digits[m].append(sent_as_digits)
 
 
-        mid = ids[m]
-        if mid not in id2idx:
-            id2idx[mid] = current_id_idx
+        if m not in id2idx:
+            id2idx[m] = current_id_idx
             current_id_idx += 1
-            index2id.append(mid)
-        mids_as_digits.append(id2idx[mid])
+            index2id.append(m)
+        mids_as_digits.append(id2idx[m])
 
     
     tuples_digits = counter_c_sent(sentences_as_digits, mids_as_digits,
@@ -288,15 +280,16 @@ def counter_s_c(messages_id):
 
 
 
-def counter_s_p(messages_id):
+def counter_s_p(mails):
+    messages = mails
+    num_messages = len(messages)  # number of input texts/messages/emails
+
     #Preprocessing
-    ids = messages_id.keys()
     sentences = []
     max_num_words = 0
-    for m in range(len(ids)):
-
+    for m in range(num_messages):
         # splitting sentences
-        doc = nlp(unicode(messages_id.values()[m], "utf-8"))
+        doc = nlp(unicode(mails[m], "utf-8"))
         sentences.append([sent.string.strip().encode('utf-8').strip() \
                 for sent in doc.sents])
         for s in range(len(sentences[m])):
@@ -308,19 +301,17 @@ def counter_s_p(messages_id):
                 max_num_words = len(sentences[m][s].split())
 
 
-    messages = messages_id.values()
-    # Revert messages_id to trace ids from messages
-    for mid in messages_id.keys():
-        messages_id[mid] = messages_id[mid].lower()
+    # Revert mails to trace ids from messages
+    for m in range(num_messages):
+        mails[m] = mails[m].lower()
         for punctuation in string.punctuation:
-            messages_id[mid] = messages_id[mid].replace(punctuation,"")
+            mails[m] = mails[m].replace(punctuation,"")
     ids = {}
-    for k, v in messages_id.iteritems():
+    for k, v in enumerate(mails):
         ids[v] = ids.get(v, [])
         ids[v].append(k)
 
     
-    num_messages = len(messages)  # number of input texts/messages/emails
     max_num_words = 0   # largest number of words in sentence of all messages
     sentences = []  # store sentences
     words = []  # store words
@@ -507,28 +498,29 @@ def counter_s_p(messages_id):
 
 
 
-def counter_nosentences(messages_id):
+def counter_nosentences(mails):
     #Preprocessing
-    for mid in messages_id.keys():
-        messages_id[mid] = messages_id[mid].lower()
+    messages = {}
+    for m, mail in enumerate(mails):
+        messages[m] = mail.lower()
         for punctuation in string.punctuation:
-            messages_id[mid] = messages_id[mid].replace(punctuation,"")
+            messages[m] = messages[m].replace(punctuation,"")
     
     if CYTHON:
-        tuples = counter_nos_c(messages_id)
+        tuples = counter_nos_c(messages)
     else:
-        tuples = counter_nos_p(messages_id)
+        tuples = counter_nos_p(messages)
 
     matrix = analysis(tuples)
     return matrix, tuples
 
 
 
-def counter_sentences(messages_id):
+def counter_sentences(mails):
     if CYTHON:
-        tuples = counter_s_c(messages_id)
+        tuples = counter_s_c(mails)
     else:
-        tuples = counter_s_p(messages_id)
+        tuples = counter_s_p(mails)
 
     matrix = analysis(tuples)
     return matrix, tuples
@@ -558,19 +550,20 @@ def hirsch_index(tuples):
     return hidx
 
 
-def plot_matrix(m):
+def plot_matrix(matrix):
     plt.subplot(1, 2, 1)
-    plt.plot(m[:,0],m[:,1])
+    plt.plot(matrix[:,0],matrix[:,1])
     plt.gca().invert_xaxis()
     plt.xlabel("Phrase length")
     plt.ylabel("Number of different phrases")
     plt.subplot(1, 2, 2)
-    plt.plot(m[:,0],m[:,2])
+    plt.plot(matrix[:,0],matrix[:,2])
     plt.gca().invert_xaxis()
     plt.xlabel("Phrase length")
     plt.ylabel("Appearence of all phrases")
     plt.savefig('phrases.png')
     
+
 
 if __name__ == '__main__':
     import sys
