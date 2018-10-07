@@ -1,3 +1,4 @@
+from matplotlib import pyplot as plt
 import numpy as np
 import string
 import spacy
@@ -533,6 +534,43 @@ def counter_sentences(messages_id):
     return matrix, tuples
 
 
+def hirsch_index(tuples):
+    try:
+        phr_len = len(tuples[0][0].split())
+    except:
+        phr_len = 0
+    h = {}
+    for i in range(len(tuples)):
+        if len(tuples[i][0].split()) != phr_len:
+            phr_len = len(tuples[i][0].split())
+        num_of_ids = 0
+        for j in range(len(tuples[i][1])):
+            num_of_ids += len(tuples[i][1][j])
+        h[tuples[i][0]] = min(phr_len, num_of_ids)
+    
+    sorted_h = sorted(h.items(), key=operator.itemgetter(1))
+    l = len(sorted_h)
+    for i in range(1,l):
+        if sorted_h[-i][1] < i:
+            hidx = i-1
+            break
+
+    return hidx
+
+
+def plot_matrix(m):
+    plt.subplot(1, 2, 1)
+    plt.plot(m[:,0],m[:,1])
+    plt.gca().invert_xaxis()
+    plt.xlabel("Phrase length")
+    plt.ylabel("Number of different phrases")
+    plt.subplot(1, 2, 2)
+    plt.plot(m[:,0],m[:,2])
+    plt.gca().invert_xaxis()
+    plt.xlabel("Phrase length")
+    plt.ylabel("Appearence of all phrases")
+    plt.savefig('phrases.png')
+    
 
 if __name__ == '__main__':
     import sys
@@ -543,14 +581,15 @@ if __name__ == '__main__':
         sys.exit(0)
     path = sys.argv[1]
 
-    num_cpus = mp.cpu_count()
-    print(num_cpus)
     mails = []
     for mail in os.listdir(path):
         mails.append(mail)
-   
-    p = mp.Pool(num_cpus)
-    # Sentence level
-    p.map(counter_sentences, mails)
-    # Message/document level
-    p.map(counter_nosentences, mails)
+
+    for mail in mails:
+        # Sentence level
+        matrix, tuples = counter_sentences(mail)
+        # Message/document level
+        #matrix, tuples = counter_nosentences(mail)
+  
+    hirsch_idx = hirsch_index(tuples)
+    plot_matrix(matrix) 

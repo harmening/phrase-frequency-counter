@@ -1,7 +1,8 @@
 # Phrase Frequency Counter
 
 This repo contains a sophisticated metric for evaluating the quality of eloquence and used vocabulary and the eloquence in text datasets like a collection of messages or entire
-mailboxes. This gives an useful parameter in terms of assessing the datas usefulness for the training of Neural Networks in NLP. The metric is mainly based on the frequency of recurring phrases within the single text documents.
+mailboxes. The hirsch-index is adapted as measure for the eloquence of phrases. It is an useful parameter in terms of assessing the datas usefulness for the training of Neural Networks in NLP. The metric is mainly based on the frequency of recurring phrases within the single text documents.
+
 The core algorithm is implemented in C and also in python.
 It can be chosen to count phrases on message or on sentence level (meaning, that we don't allow
 phrases to consist of more than one sentence).
@@ -10,6 +11,14 @@ The procedure for finding and counting a phrase obeys the following the rules:
 2. Search for a recurring sequence of words of this length
 3. If found, mark the sequences, so that they can't be part of shorter phrases, and count their number of occurrence.
 4. Continue with step 2 for `phr_len = phr_len - 1`
+
+### Return values
+1. `matrix`, numpy-matrix with 3 columns: phrase length, number of different phrases with this length, sum of numbers
+   of occurrences of all phrases with this length
+2. `tuples`, list of collected phrases with its number of occurrence
+
+From tuples the hirsch-index (https://en.wikipedia.org/wiki/H-index) can be computed and 
+a plotting function for the matrix is provided in order to visialize the phrase eloquence.
 
 
 ## Getting Up-And-Running
