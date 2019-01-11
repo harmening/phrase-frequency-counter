@@ -10,7 +10,6 @@ from numerics import counter_c, counter_c_sent
 LEVEL = 'SENTENCE' # 'DOCUMENT'
 
 
-
 def hirsch_index(tuples):
     try:
         phr_len = len(tuples[0][0].split())
@@ -33,25 +32,19 @@ def hirsch_index(tuples):
     return hidx
 
 def plot_matrix(matrix):
-    plt.subplot(1, 2, 1)
+    plt.subplot(1, 2, 1); plt.gca().invert_xaxis()
     plt.plot(matrix[:,0],matrix[:,1])
-    plt.gca().invert_xaxis()
-    plt.xlabel("Phrase length")
-    plt.ylabel("Number of different phrases")
-    plt.subplot(1, 2, 2)
+    plt.xlabel("Phrase length"); plt.ylabel("Number of different phrases")
+    plt.subplot(1, 2, 2); plt.gca().invert_xaxis()
     plt.plot(matrix[:,0],matrix[:,2])
-    plt.gca().invert_xaxis()
-    plt.xlabel("Phrase length")
-    plt.ylabel("Appearence of all phrases")
+    plt.xlabel("Phrase length"); plt.ylabel("Appearence of all phrases")
     plt.savefig('phrases.png')
 
-
-# helper functions
+#small helpers
 def get_substrings(input_string, substring_length):
     lst = input_string.split()
     return [' '.join(lst[i:i+substring_length]) for i in
             range(len(lst)-substring_length+1)]
-
 def get_substrings_list(input_list, substring_length):
     lst = []
     for i in input_list:
@@ -167,7 +160,6 @@ def counter_s(mails):
         for id_idx in tup[1]:
             ids.append(index2id[id_idx])
         tuples.append([" ".join(phrase), [ids]])
-    
     return tuples
 
 
@@ -189,7 +181,6 @@ if __name__ == '__main__':
         if LEVEL == 'SENTENCE':
             tuples = counter_s(mail)
             matrix = analysis(tuples)
-        
         # Message/document level
         elif LEVEL == 'DOCUMENT':
             messages = {}

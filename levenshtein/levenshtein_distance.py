@@ -14,30 +14,22 @@ def levenshtein_phrase_distance(phr_s, phr_t):
             d[w1]=idx
             idx+=1
         s1.append(d[w1])
-
     for w2 in t:
         if w2 not in d.keys():
             d[w2]=idx
             idx+=1
         s2.append(d[w2])
-
     # aviod calculation?
     aviod_calc = True
     for word in s:
         if word in t:
             avoid_calc = False
-
+    # for completely different phrases: distance = num of words of longer phrase
     if avoid_calc:
-        # for completely different phrases
-        # the distance is equal to num of words of longer phrase
         return max(len(s), len(t))
-
     else:
         return levenshtein_c(s1, len(s), s2, len(t))
         #return levenshtein_cython(s1, len(s), s2, len(t))
-
-
-
 
 if __name__ == '__main__':
     phrase_1 = "Well it's true that we love one another."

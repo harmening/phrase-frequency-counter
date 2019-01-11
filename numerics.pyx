@@ -75,7 +75,6 @@ def counter_c(list messages_as_digits, list mids_as_digits, int max_N_w):
 
 
 
-
 def counter_c_sent(list sentences_as_digits, list mids_as_digits,
                    long num_sentences, int max_N_w):
 
@@ -131,7 +130,6 @@ def counter_c_sent(list sentences_as_digits, list mids_as_digits,
             free(collected)
             collected = temp
         free(temp)
-
 
     for i in range(num_sentences):
         free(sentences[i])
