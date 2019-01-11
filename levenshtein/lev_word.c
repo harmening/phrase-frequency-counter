@@ -146,29 +146,46 @@ int _levenshtein(char *str1, char *str2)
 
 
 
-int _levenshtein(char *str1, char *str2)
+
+
+
+int _wagner_fischer(const char *str1, int str1len, const char *str2, int str2len)
 {
 
-    unsigned int x, y, str1len, str2len;
-    str1len = strlen(str1);
-    str2len = strlen(str2);
+        int a, b, c;
+ 
+        // if one string is empty, difference is length of second string
+        if (!str1len) return str2len;
+        if (!str2len) return str1len;
 
-    unsigned int distance[str2len+1][str1len+1];
-    distance[0][0] = 0;
+ 
+        /* if last letters are the same, the difference is whatever is
+         * required to edit the rest of the strings */
 
-    for (x = 1; x <= str2len; x++)
-        distance[x][0] = distance[x-1][0] + 1;
-
-    for (y = 1; y <= str1len; y++)
-        distance[0][y] = distance[0][y-1] + 1;
-
-    for (x = 1; x <= str2len; x++)
-        for (y = 1; y <= str1len; y++)
-            distance[x][y] = MINIMUM(distance[x-1][y] + 1, distance[x][y-1] + 1,
-																		 distance[x-1][y-1] + (str1[y-1] == str2[x-1] ? 0 : 1));
-
-    return(distance[str2len][str1len]);
+        if (str1[str1len - 1] == str2[str2len - 1])
+                return _wagner_fischer(str1, str1len - 1, str2, str2len - 1);
 
 
+ 
+        /* else determine minimum by: */
 
+        // changing last letter of str1 to that of str2
+        a = levenshtein(str1, str1len - 1, str2, str2len - 1);
+
+        // remove last letter of str1
+        b = levenshtein(str1, str1len,     str2, str2len - 1);
+
+        // remove last letter of str2
+        c = levenshtein(str1, str1len - 1, str2, str2len    );
+
+
+				// and check for minimum 
+        if (a > b) a = b;
+        if (a > c) a = c;
+
+ 
+        return a + 1;
 }
+
+
+

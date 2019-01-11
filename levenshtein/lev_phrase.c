@@ -30,13 +30,16 @@ int _levenshtein(int *s, int len_s, int *t, int len_t)
   return minimum(_levenshtein(s, len_s - 1, t, len_t    ) + 1,
                  _levenshtein(s, len_s    , t, len_t - 1) + 1,
                  _levenshtein(s, len_s - 1, t, len_t - 1) + cost);
+
 }
+
 
 
 
 
 int _wagner_fischer(int *s, int m, int *t, int n)
 {
+
 	int d[m+1][n+1];
 
 	for (int i=0; i<=m; i++)
@@ -44,6 +47,7 @@ int _wagner_fischer(int *s, int m, int *t, int n)
     d[i][0] = i;  // the distance of any first string to an empty second string
   }              // (transforming the string of the first i characters of s into
                  // the empty string requires i deletions)
+
 
 	for (int j=0; j<=n; j++)
 	{
@@ -65,7 +69,8 @@ int _wagner_fischer(int *s, int m, int *t, int n)
        }
     }
   }
- 
+
+
   return d[m][n];
 }
 
