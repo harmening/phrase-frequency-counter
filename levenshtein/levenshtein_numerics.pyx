@@ -1,7 +1,7 @@
 from cpython.string cimport PyString_AsString
 from libc.stdlib cimport malloc
 
-cdef extern from "levenshtein.c":
+cdef extern from "lev_phrase.c":
     int _levenshtein(int *s, int len_s, int *t, int len_t)
     int _wagner_fischer(int *s, int len_s, int *t, int len_t)
 

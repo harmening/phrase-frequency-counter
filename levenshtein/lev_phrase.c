@@ -68,3 +68,18 @@ int _wagner_fischer(int *s, int m, int *t, int n)
  
   return d[m][n];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
