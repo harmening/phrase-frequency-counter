@@ -2,6 +2,7 @@
 const int false = 0;
 const int true = 1;
 
+
 // Linked List Struct for information of collected phrases
 struct _LinkedListStruct  {
   int *phrase;
@@ -9,6 +10,7 @@ struct _LinkedListStruct  {
   int num_ids;
   struct _LinkedListStruct*next;
 } _LLS;
+
 
 
 
@@ -20,9 +22,11 @@ struct _LinkedListStruct *_pcounter(
               int **mark, // 2d-array of bool for each word in all messages
               long *ids, int phr_len)
 {
+
   // Define head and current of linked list 
   struct _LinkedListStruct *collected_head = NULL;
   struct _LinkedListStruct *collected_current = collected_head;
+
 
 
   /***** calculate all possible phrases in text with phr_len *****/
@@ -57,6 +61,7 @@ struct _LinkedListStruct *_pcounter(
       }
     }
   }
+
 
 
   /***** search all possible phrases in all messages for recurrence*****/
@@ -94,6 +99,7 @@ struct _LinkedListStruct *_pcounter(
       }
     }
 
+
     
     /***** Transfer collected phrases and ids to results (linked list) *****/
     // only collect phrase if it appears more than once
@@ -118,6 +124,7 @@ struct _LinkedListStruct *_pcounter(
       }
     }
   }
+
 
 
   /***** Mark all occurences of collected phrases *****/
@@ -146,6 +153,8 @@ struct _LinkedListStruct *_pcounter(
 
 
 
+
+
 // Phrase counter with respecting sentences
 struct _LinkedListStruct *_pcounter_sent(
               int *mess_len, //array storing the number of sentences per message
@@ -159,7 +168,8 @@ struct _LinkedListStruct *_pcounter_sent(
   struct _LinkedListStruct *collected_head = NULL;
   struct _LinkedListStruct *collected_current = NULL;
 
-  
+ 
+
   /***** calculate all possible phrases in text with phr_len *****/
   // Number of possible phrases
   long poss_num_phr = 0;
@@ -192,6 +202,7 @@ struct _LinkedListStruct *_pcounter_sent(
       }
     }
   }
+
 
 
   /***** search all possible phrases in all sentences for recurrence*****/
@@ -235,7 +246,8 @@ struct _LinkedListStruct *_pcounter_sent(
       }
     }
     
-  
+ 
+
     /***** Transfer collected phrases and ids to results (linked list) *****/
     // only collect phrase if it appears more than once
     if (occurrence >= 2 && c_idx >= 1)
@@ -261,6 +273,7 @@ struct _LinkedListStruct *_pcounter_sent(
     }
   }
 
+
   
   /***** Mark all occurences of collected phrases *****/
   struct _LinkedListStruct *collected = collected_head;
@@ -283,5 +296,7 @@ struct _LinkedListStruct *_pcounter_sent(
     }
     collected = collected->next;
   }
+
   return collected_head;
+
 }
