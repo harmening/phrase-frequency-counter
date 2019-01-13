@@ -4,7 +4,7 @@ from distutils.core import setup
 from Cython.Build import cythonize
 from distutils.extension import Extension
 
-#setup(ext_modules = cythonize("numerics.pyx"))
+#setup(name = "numerics", ext_modules = cythonize("numerics.pyx"))
 
 ext_modules=[
     Extension("numerics",

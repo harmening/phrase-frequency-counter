@@ -1,3 +1,4 @@
-numerics.c
-numerics.so
+*_numerics.c
+*numerics.so
+*build
 .cache

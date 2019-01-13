@@ -71,50 +71,6 @@ int _levenshtein2(char *str1, char *str2)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int _levenshtein(char *str1, char *str2)
 {
 

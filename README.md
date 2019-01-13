@@ -3,7 +3,7 @@
 This repo contains a sophisticated metric for evaluating the quality of eloquence and used vocabulary and the eloquence in text datasets like a collection of messages or entire
 mailboxes. The hirsch-index is adapted as measure for the eloquence of phrases. It is an useful parameter in terms of assessing the datas usefulness for the training of Neural Networks in NLP. The metric is mainly based on the frequency of recurring phrases within the single text documents.
 
-The core algorithm is implemented in C and also in python.
+The core algorithm is implemented in C and also in Cython.
 It can be chosen to count phrases on message or on sentence level (meaning, that we don't allow
 phrases to consist of more than one sentence).
 The procedure for finding and counting a phrase obeys the following the rules:
@@ -40,5 +40,24 @@ Here are some instructions for getting your own Verne running on your local comp
 
 ### Running the script
 To start the phrase counting on a given mailbox / collection of messages/texts, run
-`python counter.py <<path_to_mailbox_folder>>`.
 
+```sh
+$ python counter.py <<path_to_mailbox_folder>>
+```
+
+
+
+### Support my projects :gift_heart:
+
+I love open-source! And I try to reply everyone needing help using my projects. Also, you are of cause free to integrate and my project in your applications. However, if you get some profit from this or just want to encourage me to continue creating stuff, there are few ways you can do it:
+ - Starring and sharing projects you like
+ - :stew: [Share your next meal][sharemeal] with these unfortunate, because there is no reason not to do so!
+ - :book: [Buy me a book][amazon]: I love books and I will always remember you :wink:
+ - **Bitcoin**: You can send me bitcoins at this address:
+ `xpub6DUNko8GTPePPgtbK1qfpiLCoujQXUBTi1qtfw7V2oBCdnk1H9d3if3pazmCy9QgENKSNPpHAXRZp8HLSG7pWwba5HRcHLC3TjbXYXXZh57`
+
+Thanks! :heart:
+
+
+[amazon]: http://amzn.eu/hRo9sIZ
+[sharemeal]: https://sharethemeal.org/en/index.html
