@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 import numpy as np
-import string
+import string, re
 import spacy
 nlp = spacy.load('en')
 
@@ -66,6 +66,7 @@ def analysis(tuples):
         for i in range(max_phr_len):
             matrix[i][0] = max_phr_len-i
         for tup in tuples:
+            print(tup)
             if len(tup[1]) > 0:
                 # 2nd entry: number of different phrases with this phr_len
                 matrix[max_phr_len-len(tup[0].split())][1] += 1
@@ -81,7 +82,10 @@ def counter_nos(mails):
     word2idx, id2idx = {}, {}
     index2word, index2id, messages_as_digits, mids_as_digits = [], [], [], []
     # Transform messages of words into sequence of digits
-    for mail in mails:
+    for m in range(len(mails)):
+        mid = mails.keys()[m]
+        mail = mails[mid].lower()
+        mail = re.sub(r'[^\w\s]','',mail)
         message = mail.split()
         if len(message) > max_num_words:
             max_num_words = len(message)
@@ -120,9 +124,10 @@ def counter_s(mails):
     #Preprocessing
     sentences = []
     for m in range(len(mails)):
+        mid = mails.keys()[m]
         sentences_as_digits.append([])
         # splitting sentences
-        doc = nlp(unicode(mails[m], "utf-8"))
+        doc = nlp(unicode(mails[mid], "utf-8"))
         sentences.append([sent.string.strip().encode('utf-8').strip() \
                 for sent in doc.sents])
         for s in range(len(sentences[m])):
