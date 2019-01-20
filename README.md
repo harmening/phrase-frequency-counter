@@ -1,5 +1,9 @@
 # Phrase Frequency Counter
 
+[![build](https://travis-ci.org/harmening/phrase-frequency-counter.svg?branch=master)](https://travis-ci.org/harmening/phrase-frequency-counter)
+[![coverage](https://codecov.io/gh/harmening/phrase-frequency-counter/branch/master/graph/badge.svg)](https://codecov.io/gh/harmening/phrase-frequency-counter)
+[![python](https://img.shields.io/badge/python-2.7|3.4|3.5|3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+
 This repo contains a sophisticated metric for evaluating the quality of eloquence and used vocabulary and the eloquence in text datasets like a collection of messages or entire
 mailboxes. The hirsch-index is adapted as measure for the eloquence of phrases. It is an useful parameter in terms of assessing the datas usefulness for the training of Neural Networks in NLP. The metric is mainly based on the frequency of recurring phrases within the single text documents.
 
