@@ -82,8 +82,7 @@ def counter_nos(mails):
     word2idx, id2idx = {}, {}
     index2word, index2id, messages_as_digits, mids_as_digits = [], [], [], []
     # Transform messages of words into sequence of digits
-    for m in range(len(mails)):
-        mid = mails.keys()[m]
+    for m, mid in iterate(mails.keys()):
         mail = mails[mid].lower()
         mail = re.sub(r'[^\w\s]','',mail)
         message = mail.split()
@@ -123,8 +122,7 @@ def counter_s(mails):
     index2word, index2id, sentences_as_digits, mids_as_digits = [], [], [], []
     #Preprocessing
     sentences = []
-    for m in range(len(mails)):
-        mid = mails.keys()[m]
+    for m, mid in iterate(mails.keys()):
         sentences_as_digits.append([])
         # splitting sentences
         doc = nlp(unicode(mails[mid], "utf-8"))
