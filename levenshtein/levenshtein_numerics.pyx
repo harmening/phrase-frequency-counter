@@ -36,7 +36,7 @@ def levenshtein_c(list phr_lst_s not None, int len_s, list phr_lst_t not None, i
     #return _levenshtein(<int*> s, len_s, <int*> t, len_t) 
 
 
-def levenshtein_word(char str1, char str2):
+def levenshtein_word(str1, str2):
     dist1 = _levenshtein1(<char*> str1, <char*> str2)
     dist2 = _levenshtein2(<char*> str1, <char*> str2)
     dist3 = _wagner_fischer_word(<char*> str1, len(str1), <char*> str2, len(str2))
