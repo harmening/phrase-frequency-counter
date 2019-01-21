@@ -12,6 +12,8 @@ int minimum(int a, int b, int c)  {return min(min(a, b), c);}
 
 
 
+
+
 int _levenshtein(int *s, int len_s, int *t, int len_t)
 {
 	int cost;

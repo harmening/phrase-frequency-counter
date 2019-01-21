@@ -3,6 +3,7 @@ const int false = 0;
 const int true = 1;
 
 
+
 // Linked List Struct for information of collected phrases
 struct _LinkedListStruct  {
   int *phrase;
@@ -155,6 +156,8 @@ struct _LinkedListStruct *_pcounter(
 
 
 
+
+
 // Phrase counter with respecting sentences
 struct _LinkedListStruct *_pcounter_sent(
               int *mess_len, //array storing the number of sentences per message
@@ -300,3 +303,5 @@ struct _LinkedListStruct *_pcounter_sent(
   return collected_head;
 
 }
+
+

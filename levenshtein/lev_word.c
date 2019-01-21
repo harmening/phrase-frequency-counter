@@ -35,6 +35,7 @@ int _levenshtein1(char *str1, char *str2)
 
 
 
+
 /* Only access the contents of the previous column when filling the distance-matrix
 	 column-by-column. Faster for longer words!
 */
@@ -65,6 +66,7 @@ int _levenshtein2(char *str1, char *str2)
     return(column[str1len]);
 
 }
+
 
 
 
