@@ -1,0 +1,2 @@
+test.py linguist-vendored=true
+cythonize_numerics.py linguist-vendored=true

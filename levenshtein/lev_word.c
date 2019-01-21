@@ -91,13 +91,13 @@ int _wagner_fischer_word(const char *str1, int str1len, const char *str2, int st
         /* else determine minimum by: */
 
         // changing last letter of str1 to that of str2
-        a = levenshtein(str1, str1len - 1, str2, str2len - 1);
+        a = _wagner_fischer_word(str1, str1len - 1, str2, str2len - 1);
 
         // remove last letter of str1
-        b = levenshtein(str1, str1len,     str2, str2len - 1);
+        b = _wagner_fischer_word(str1, str1len,     str2, str2len - 1);
 
         // remove last letter of str2
-        c = levenshtein(str1, str1len - 1, str2, str2len    );
+        c = _wagner_fischer_word(str1, str1len - 1, str2, str2len    );
 
 
 				// and check for minimum 
