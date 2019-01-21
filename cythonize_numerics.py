@@ -12,8 +12,8 @@ ext_modules=[
               extra_compile_args=['-std=c99'],
               libraries=["m"] # Unix-like specific
     ),
-    Extension("levenshtein.levenshtein_numerics",
-              sources=["levenshtein/src_levenshtein_numerics.pyx", "levenshtein/lev_phrase.c", "levenshtein/lev_word.c"],
+    Extension("levenshtein_numerics",
+              sources=["levenshtein/levenshtein_numerics.pyx", "levenshtein/lev_phrase.c", "levenshtein/lev_word.c"],
               extra_compile_args=['-std=c99'],
               libraries=["m"] # Unix-like specific
               )

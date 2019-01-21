@@ -34,4 +34,4 @@ def levenshtein_phrase_distance(phr_s, phr_t):
 if __name__ == '__main__':
     phrase_1 = "Well it's true that we love one another."
     phrase_2 = "I love Jack White like a little brother."
-    levenshtein_phrase_distance(phrase_1, phrase_2):
+    levenshtein_phrase_distance(phrase_1, phrase_2)

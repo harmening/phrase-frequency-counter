@@ -21,7 +21,7 @@ The procedure for finding and counting a phrase obeys the following the rules:
    of occurrences of all phrases with this length
 2. `tuples`, list of collected phrases with its number of occurrence
 
-From tuples the [hirsch-index][https://en.wikipedia.org/wiki/H-index] can be computed and 
+From tuples the [hirsch-index](https://en.wikipedia.org/wiki/H-index>) can be computed and 
 a plotting function for the matrix is provided in order to visialize the phrase eloquence.
 
 
