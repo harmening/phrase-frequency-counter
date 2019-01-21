@@ -1,3 +1,4 @@
+//using namespace std;
 #define MINIMUM(a, b, c) ((a) < (b) ? ((a) < (c) ? (a) : (c)) : ((b) < (c) ? (b) : (c)))
 
 #include <stdio.h>
@@ -69,7 +70,7 @@ int _levenshtein2(char *str1, char *str2)
 
 
 
-int _wagner_fischer(const char *str1, int str1len, const char *str2, int str2len)
+int _wagner_fischer_word(const char *str1, int str1len, const char *str2, int str2len)
 {
 
         int a, b, c;
@@ -83,7 +84,7 @@ int _wagner_fischer(const char *str1, int str1len, const char *str2, int str2len
          * required to edit the rest of the strings */
 
         if (str1[str1len - 1] == str2[str2len - 1])
-                return _wagner_fischer(str1, str1len - 1, str2, str2len - 1);
+                return _wagner_fischer_word(str1, str1len - 1, str2, str2len - 1);
 
 
  

@@ -11,10 +11,14 @@ ext_modules=[
               sources=["numerics.pyx"],
               extra_compile_args=['-std=c99'],
               libraries=["m"] # Unix-like specific
-    )
+    ),
+    Extension("levenshtein_numerics",
+              sources=["levenshtein/levenshtein_numerics.pyx", "levenshtein/lev_phrase.c", "levenshtein/lev_word.c"],
+              extra_compile_args=['-std=c99'],
+              libraries=["m"] # Unix-like specific
+              )
 ]
 
 setup(
-  name = "numerics",
   ext_modules = cythonize(ext_modules)
 )

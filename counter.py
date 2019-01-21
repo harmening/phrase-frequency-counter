@@ -133,8 +133,7 @@ def counter_s(mails):
         sentences_as_digits.append([])
         # splitting sentences
         doc = nlp(unicode(mails[mid]))#, "utf-8"))
-        sentences.append([sent.string.strip().encode('utf-8').strip() \
-                for sent in doc.sents])
+        sentences.append([sent.string.strip() for sent in doc.sents])
         for s in range(len(sentences[m])):
             num_sentences += 1
             # strip punctuation for phrase cleaning
