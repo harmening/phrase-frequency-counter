@@ -1,10 +1,10 @@
 from cpython.string cimport PyString_AsString
 from libc.stdlib cimport malloc
 
-cdef extern from "lev_phrase.c":
+cdef extern from "lev_phrase.h":
     int _levenshtein(int *s, int len_s, int *t, int len_t)
     int _wagner_fischer(int *s, int len_s, int *t, int len_t)
-cdef extern from "lev_word.c":
+cdef extern from "lev_word.h":
     int _levenshtein1(char *str1, char *str2)
     int _levenshtein2(char *str1, char *str2)
     int _wagner_fischer_word(const char *str1, int str1len, const char *str2, int str2len)
