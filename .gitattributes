@@ -1,2 +1,3 @@
 test.py linguist-vendored=true
 cythonize_numerics.py linguist-vendored=true
+levenshtein_distance.py linguist-vendored=true

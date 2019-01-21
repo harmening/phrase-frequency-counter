@@ -72,7 +72,7 @@ int _levenshtein2(char *str1, char *str2)
 
 
 
-int _wagner_fischer_word(const char *str1, int str1len, const char *str2, int str2len)
+int _wagner_fischer_word(char *str1, int str1len, char *str2, int str2len)
 {
 
         int a, b, c;
