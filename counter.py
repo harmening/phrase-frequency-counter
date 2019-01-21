@@ -10,6 +10,13 @@ from numerics import counter_c, counter_c_sent
 LEVEL = 'SENTENCE' # 'DOCUMENT'
 
 
+# Python 3 compatibility hack
+try:
+    unicode('')
+except NameError:
+    unicode = str
+
+
 def hirsch_index(tuples):
     try:
         phr_len = len(tuples[0][0].split())
