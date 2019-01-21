@@ -2,8 +2,8 @@ from counter import counter_s, counter_nos
 from counter import analysis
 import numpy as np 
 from numpy.testing import assert_array_equal
-#from levenshtein_numerics import levenshtein_word
-#from levenshtein_distance import levenshtein_phrase_distance
+from levenshtein_numerics import levenshtein_word
+from levenshtein_distance import levenshtein_phrase_distance
 
 def testCounter():
     d = {1: 'A B C D', 2: 'A B C E A B C D', 3: 'A B C D E', \
@@ -75,7 +75,6 @@ def testNoSentenceSplitting():
     assert_array_equal(matrix_nos[0], [4, 1, 3]) # it is a phrase
     assert_array_equal(matrix_nos[1], [3, 1, 2]) # Mr Smith said
 
-"""
 def testLevenshteinWord():
     assert levenshtein_word("sport", "support") != -1
 
@@ -83,4 +82,4 @@ def testLevenshteinPhrase():
     phrase_1 = "Well it's true that we love one another."
     phrase_2 = "I love Jack White like a little brother."
     assert levenshtein_phrase_distance(phrase_1, phrase_2) == 8
-"""
+    assert levenshtein_phrase_distance(phrase_1, phrase_2, CYTHON=True) == 8

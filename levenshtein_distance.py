@@ -2,7 +2,7 @@ from levenshtein_numerics import levenshtein_c, levenshtein_cython
 import numpy as np
 import pickle, os, gzip, string
 
-def levenshtein_phrase_distance(phr_s, phr_t):
+def levenshtein_phrase_distance(phr_s, phr_t, CYTHON=False):
     s, t = phr_s.split(), phr_t.split()
     # Create dictionary and assign each word to a unique int
     d = {}
@@ -28,5 +28,7 @@ def levenshtein_phrase_distance(phr_s, phr_t):
     if avoid_calc:
         return max(len(s), len(t))
     else:
-        return levenshtein_c(s1, len(s), s2, len(t))
-        #return levenshtein_cython(s1, len(s), s2, len(t))
+        if CYTHON:
+            return levenshtein_cython(s1, len(s), s2, len(t))
+        else:
+            return levenshtein_c(s1, len(s), s2, len(t))
