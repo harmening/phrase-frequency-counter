@@ -2,7 +2,7 @@ from counter import counter_s, counter_nos
 from counter import analysis
 import numpy as np 
 from numpy.testing import assert_array_equal
-from levenshtein_numerics import levenshtein_word
+from levenshtein.levenshtein_numerics import levenshtein_word
 
 def testCounter():
     d = {1: 'A B C D', 2: 'A B C E A B C D', 3: 'A B C D E', \
