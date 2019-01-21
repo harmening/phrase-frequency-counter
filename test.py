@@ -75,8 +75,16 @@ def testNoSentenceSplitting():
     assert_array_equal(matrix_nos[0], [4, 1, 3]) # it is a phrase
     assert_array_equal(matrix_nos[1], [3, 1, 2]) # Mr Smith said
 
+def testHirschIndex():
+    d = {1: 'Here it is. A phrase, but Mr. Smith said this is an' +
+        ' example of only one phrase.', 2: 'Although it is a phrase here again.', \
+        3: 'It is a phrase. Mr Smith said it.'}
+    matrix_nos = analysis(counter_nos(d))
+    hidx = hirsch_index(tuples)
+    assert hidx > 0  and hidx < len([word for doc in d.values() for word in doc.split()])
+
 def testLevenshteinWord():
-    assert levenshtein_word("sport", "support") != -1
+    assert levenshtein_word(u"sport", u"support") != -1
 
 def testLevenshteinPhrase():
     phrase_1 = "Well it's true that we love one another."
