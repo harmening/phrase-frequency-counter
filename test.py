@@ -84,7 +84,7 @@ def testHirschIndex():
     assert hidx > 0  and hidx < len([word for doc in d.values() for word in doc.split()])
 
 def testLevenshteinWord():
-    assert levenshtein_word(u"sport", u"support") != -1
+    assert levenshtein_word("sport".encode('utf-8'), "support".encode('utf-8')) != -1
 
 def testLevenshteinPhrase():
     phrase_1 = "Well it's true that we love one another."
