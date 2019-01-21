@@ -79,8 +79,8 @@ def testHirschIndex():
     d = {1: 'Here it is. A phrase, but Mr. Smith said this is an' +
         ' example of only one phrase.', 2: 'Although it is a phrase here again.', \
         3: 'It is a phrase. Mr Smith said it.'}
-    matrix_nos = analysis(counter_nos(d))
-    hidx = hirsch_index(tuples)
+    tuples_nos = counter_nos(d)
+    hidx = hirsch_index(tuples_nos)
     assert hidx > 0  and hidx < len([word for doc in d.values() for word in doc.split()])
 
 def testLevenshteinWord():
